@@ -20,7 +20,7 @@ a:hover {
   color: #d42e34;
 }
 header {
-  background-image: url("gym_picture_header.png");
+  background-image: url("images/gym_picture_header.png");
   background-size: 100% auto;
   position: center;
   color: #fff;
