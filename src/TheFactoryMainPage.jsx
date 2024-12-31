@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./App.css"; // Make sure to adjust the path to your stylesheet if necessary
 
 const TheFactoryMainPage = () => {
@@ -9,24 +10,24 @@ const TheFactoryMainPage = () => {
         <nav>
           <ul className="top-menu">
             <li>
-              <a href="workouts.html">Workouts</a>
+              <Link to="/Workouts">Workouts</Link>
             </li>
             <li>
-              <a href="bmi_calculator.html">BMI Calculator</a>
+              <Link to="/BMICalculator">BMI Calculator</Link>
             </li>
             <li>
-              <a href="schedule.html">Our Schedule</a>
+              <Link to="/Schedule">Our Schedule</Link>
             </li>
             <li>
-              <a href="trainers.html">Trainers</a>
+              <Link to="/Trainers">Trainers</Link>
             </li>
             <li>
-              <a href="nutrition.html">Nutrition</a>
+              <Link to="/Nutrition">Nutrition</Link>
             </li>
           </ul>
           <div className="auth-links">
-            <a href="login.html">Login</a>
-            <a href="signup.html">Create Account</a>
+            <Link to="/Login">Login</Link>
+            <Link to="/Signup">Create Account</Link>
           </div>
         </nav>
       </header>

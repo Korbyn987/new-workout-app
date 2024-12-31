@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
+import TheFactoryMainPage from "./TheFactoryMainPage";
+import Workouts from "./Workouts";
+import BMICalculator from "./BMICalculator";
+import Schedule from "./Schedule";
+import Trainers from "./Trainers";
+import Nutrition from "./Nutrition";
+import Login from "./Login";
+import Signup from "./Signup";
 
 function App() {
   const [feet, setFeet] = useState("");
@@ -44,43 +53,50 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>BMI Calculator</h1>
-        <div>
-          <input
-            type="number"
-            placeholder="Feet"
-            value={feet}
-            onChange={(e) => setFeet(e.target.value)}
-          />
-          <input
-            type="number"
-            placeholder="Inches"
-            value={inches}
-            onChange={(e) => setInches(e.target.value)}
-          />
-          <input
-            type="number"
-            placeholder="Weight (lbs)"
-            value={weight}
-            onChange={(e) => setWeight(e.target.value)}
-          />
-          <button onClick={calculateBMI}>Calculate BMI</button>
-        </div>
-        <p>{bmiResult}</p>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <h1>The Factory</h1>
+          <nav>
+            <ul className="top-menu">
+              <li>
+                <Link to="/TheFactoryMainPage">Home</Link>
+              </li>
+              <li>
+                <Link to="/Workouts">Workouts</Link>
+              </li>
+              <li>
+                <Link to="/BMICalculator">BMI Calculator</Link>
+              </li>
+              <li>
+                <Link to="/Schedule">Our Schedule</Link>
+              </li>
+              <li>
+                <Link to="/Trainers">Trainers</Link>
+              </li>
+              <li>
+                <Link to="/Nutrition">Nutrition</Link>
+              </li>
+            </ul>
+            <div className="auth-links">
+              <Link to="/Login">Login</Link>
+              <Link to="/Signup">Create Account</Link>
+            </div>
+          </nav>
+        </header>
 
-        <h2>Dropdown Example</h2>
-        <button className="dropbtn" onClick={() => toggleDropdown("example")}>
-          Toggle Dropdown
-        </button>
-        {dropdowns.example && (
-          <div className="dropdown-content">
-            <p>Dropdown Content</p>
-          </div>
-        )}
-      </header>
-    </div>
+        <Routes>
+          <Route path="/" element={<TheFactoryMainPage />} />
+          <Route path="/Workouts" element={<Workouts />} />
+          <Route path="/BMICalculator" element={<BMICalculator />} />
+          <Route path="/Schedule" element={<Schedule />} />
+          <Route path="/Trainers" element={<Trainers />} />
+          <Route path="/Nutrition" element={<Nutrition />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Signup" element={<Signup />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
