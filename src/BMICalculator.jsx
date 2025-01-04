@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import { Link } from "react-router-dom";
 
 function BMICalculator() {
   const [feet, setFeet] = useState("");
@@ -32,36 +33,6 @@ function BMICalculator() {
 
   return (
     <div>
-      <header>
-        <h1>BMI Calculator</h1>
-        <nav>
-          <ul className="top-menu">
-            <li>
-              <a href="/home">Home</a>
-            </li>
-            <li>
-              <a href="/workouts">Workouts</a>
-            </li>
-            <li>
-              <a href="/bmi-calculator">BMI Calculator</a>
-            </li>
-            <li>
-              <a href="/schedule">Schedule</a>
-            </li>
-            <li>
-              <a href="/trainers">Trainer</a>
-            </li>
-            <li>
-              <a href="/nutrition">Nutrition</a>
-            </li>
-          </ul>
-          <div className="auth-links">
-            <a href="/login">Login</a>
-            <a href="/signup">Create Account</a>
-          </div>
-        </nav>
-      </header>
-
       <section className="calculator-container">
         <div className="calculator">
           <h2>Calculate Your BMI</h2>
@@ -117,10 +88,6 @@ function BMICalculator() {
           </table>
         </div>
       </section>
-
-      <footer>
-        <p>&copy; 2024 The Factory Gym. All rights reserved.</p>
-      </footer>
     </div>
   );
 }

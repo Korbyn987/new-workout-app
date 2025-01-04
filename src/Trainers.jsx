@@ -1,39 +1,10 @@
 import React from "react";
 import "./App.css";
+import { Link } from "react-router-dom";
 
 function Trainers() {
   return (
     <div>
-      <header>
-        <h1>Our Trainers</h1>
-        <nav>
-          <ul className="top-menu">
-            <li>
-              <a href="The_Factory_Main_Page.html">Home</a>
-            </li>
-            <li>
-              <a href="workouts.html">Workouts</a>
-            </li>
-            <li>
-              <a href="bmi_calculator.html">BMI Calculator</a>
-            </li>
-            <li>
-              <a href="schedule.html">Schedule</a>
-            </li>
-            <li>
-              <a href="trainers.html">Trainers</a>
-            </li>
-            <li>
-              <a href="nutrition.html">Nutrition</a>
-            </li>
-          </ul>
-          <div className="auth-links">
-            <a href="login.html">Login</a>
-            <a href="signup.html">Create Account</a>
-          </div>
-        </nav>
-      </header>
-
       <section className="trainer">
         <h2>Meet Our Trainers</h2>
 

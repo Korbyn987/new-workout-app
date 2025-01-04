@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import { Link } from "react-router-dom";
 
 function Nutrition() {
   const [recipeType, setRecipeType] = useState("cutting");
@@ -12,36 +13,6 @@ function Nutrition() {
 
   return (
     <div>
-      <header>
-        <h1>Nutrition</h1>
-        <nav>
-          <ul className="top-menu">
-            <li>
-              <a href="/The_Factory_Main_Page">Home</a>
-            </li>
-            <li>
-              <a href="/workouts">Workouts</a>
-            </li>
-            <li>
-              <a href="/bmi_calculator">BMI Calculator</a>
-            </li>
-            <li>
-              <a href="/schedule">Schedule</a>
-            </li>
-            <li>
-              <a href="/trainers">Trainers</a>
-            </li>
-            <li>
-              <a href="/nutrition">Nutrition</a>
-            </li>
-          </ul>
-          <div className="auth-links">
-            <a href="/login">Login</a>
-            <a href="/signup">Create Account</a>
-          </div>
-        </nav>
-      </header>
-
       <section className="nutrition-info">
         <h2>General Nutritional Information</h2>
         <p>

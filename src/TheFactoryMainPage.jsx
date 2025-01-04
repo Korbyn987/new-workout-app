@@ -1,37 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Layout from "./Layout"; // Assuming Layout is in the same folder, adjust the path if necessary
 import "./App.css"; // Make sure to adjust the path to your stylesheet if necessary
 
 const TheFactoryMainPage = () => {
   return (
-    <div>
-      <header>
-        <h1>The Factory</h1>
-        <nav>
-          <ul className="top-menu">
-            <li>
-              <Link to="/Workouts">Workouts</Link>
-            </li>
-            <li>
-              <Link to="/BMICalculator">BMI Calculator</Link>
-            </li>
-            <li>
-              <Link to="/Schedule">Our Schedule</Link>
-            </li>
-            <li>
-              <Link to="/Trainers">Trainers</Link>
-            </li>
-            <li>
-              <Link to="/Nutrition">Nutrition</Link>
-            </li>
-          </ul>
-          <div className="auth-links">
-            <Link to="/Login">Login</Link>
-            <Link to="/Signup">Create Account</Link>
-          </div>
-        </nav>
-      </header>
-
+    <Layout>
       <section id="about" className="section">
         <h2>About us:</h2>
         <p>
@@ -153,7 +127,7 @@ const TheFactoryMainPage = () => {
       <footer>
         <p>&copy; 2024 The Factory. All rights reserved.</p>
       </footer>
-    </div>
+    </Layout>
   );
 };
 
