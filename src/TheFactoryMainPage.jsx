@@ -1,11 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Layout from "./Layout"; // Assuming Layout is in the same folder, adjust the path if necessary
 import "./App.css"; // Make sure to adjust the path to your stylesheet if necessary
 
 const TheFactoryMainPage = () => {
   return (
-    <Layout>
+    <>
       <section id="about" className="section">
         <h2>About us:</h2>
         <p>
@@ -127,7 +126,7 @@ const TheFactoryMainPage = () => {
       <footer>
         <p>&copy; 2024 The Factory. All rights reserved.</p>
       </footer>
-    </Layout>
+    </>
   );
 };
 

@@ -20,16 +20,16 @@ a:hover {
   color: #d42e34;
 }
 header {
-  background-image: url("images/gym_picture_header.png");
+  background-image: url("images/PurpleGymHeader.webp");
   background-size: 100% auto;
-  position: center;
+  position: flex;
   color: #fff;
   text-align: center;
   padding: 67px 0;
   overflow: hidden;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center bottom;
+  background-attachment: flex;
+  background-position: center;
 }
 /*
 header::before {
