@@ -72,7 +72,7 @@ const TheFactoryMainPage = () => {
 
       <section id="testimonials" className="section">
         <div className="testimonial">
-          <img src="Sara_image.webp" alt="Avatar" className="avatar" />
+          <img src="images/Sara_image.webp" alt="Avatar" className="avatar" />
           <blockquote>
             <p>
               "Joining The Factory was the best decision I ever made for my

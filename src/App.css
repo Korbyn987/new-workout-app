@@ -100,7 +100,7 @@ footer {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .section h2 {
-  color: #e41e26;
+  color: #8e44ad;
 }
 .section p {
   color: #555;
@@ -161,15 +161,33 @@ button:hover {
   position: absolute;
   top: 10px;
   right: 20px;
+  display: flex;
+  gap: 15px; /* Adds spacing between links */
 }
+
 .auth-links a {
-  color: #fff;
+  background: #1a1a1a; /* Matte black background */
+  color: #fff; /* White text for contrast */
   text-decoration: none;
   font-size: 14px;
-  margin-left: 10px;
+  font-weight: bold;
+  padding: 8px 15px;
+  border: 2px solid #680fbf; /* Purple neon border */
+  border-radius: 5px;
+  text-align: center;
+  transition: 0.3s ease;
+  box-shadow: 0 0 10px rgba(104, 15, 191, 0.5), 0 0 20px rgba(104, 15, 191, 0.3);
 }
+
 .auth-links a:hover {
-  color: #ccc;
+  background: #680fbf; /* Purple glow effect on hover */
+  color: #000; /* Black text for contrast */
+  box-shadow: 0 0 15px #ff00ff, 0 0 25px #680fbf, 0 0 40px #ff00ff;
+}
+
+.auth-links a:active {
+  transform: scale(0.95); /* Adds a "pressed" effect */
+  box-shadow: 0 0 5px rgba(104, 15, 191, 0.7), 0 0 10px rgba(60, 3, 110, 0.7);
 }
 
 .calculator {
@@ -237,36 +255,44 @@ th {
 }
 
 .dropbtn {
-  background-color: #333;
-  color: white;
+  background-color: #222; /* Matte black background for the buttons */
+  color: #b300ff; /* Neon purple text color */
   padding: 10px 20px;
   font-size: 16px;
   border: none;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropbtn:hover {
+  background-color: #b300ff; /* Neon purple hover effect */
+  color: #222; /* Matte black text */
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: #333; /* Matte black dropdown background */
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8); /* Deep shadow effect */
   z-index: 1;
+  border-radius: 5px;
 }
 
 .dropdown-content a {
-  color: black;
+  color: #b300ff; /* Neon purple text */
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  transition: background-color 0.3s ease;
 }
 
 .dropdown-content a:hover {
-  background-color: #ddd;
+  background-color: #444; /* Slightly lighter black for hover */
 }
 
-.dropdown:hover .dropbtn {
-  background-color: #555;
+.dropdown.show .dropdown-content {
+  display: block; /* Show dropdown when the class is toggled */
 }
 
 .show {
@@ -593,4 +619,39 @@ cite {
   padding: 20px;
   margin-top: 20px;
   border-radius: 10px;
+}
+.gym-button {
+  background: #1a1a1a; /* Matte black background */
+  color: #fff; /* White text for contrast */
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  margin: 10px;
+  border: 2px solid #680fbf; /* Purple neon border */
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 0 10px rgba(104, 15, 191, 0.5), 0 0 20px rgba(104, 15, 191, 0.3);
+}
+
+.gym-button:hover {
+  background: #680fbf; /* Purple glow effect on hover */
+  color: #000; /* Text changes to black for contrast */
+  box-shadow: 0 0 15px #ff00ff, 0 0 25px #680fbf, 0 0 40px #ff00ff;
+}
+
+.gym-button:active {
+  transform: scale(0.95); /* Adds a "pressed" effect */
+  box-shadow: 0 0 5px rgba(104, 15, 191, 0.7), 0 0 10px rgba(60, 3, 110, 0.7);
+}
+
+/* Button Container (optional for layout consistency) */
+.gym-button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px; /* Space between buttons */
 }

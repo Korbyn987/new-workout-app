@@ -9,7 +9,7 @@ const Layout = () => {
       <header className="App-header">
         <h1>The Factory</h1>
         <nav>
-          <ul className="top-menu">
+          <ul className="gym-button">
             <li>
               <Link to="/">Home</Link>
             </li>
