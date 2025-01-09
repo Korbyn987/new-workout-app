@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 function BMICalculator() {
@@ -7,6 +8,21 @@ function BMICalculator() {
   const [inches, setInches] = useState("");
   const [weight, setWeight] = useState("");
   const [bmiResult, setBmiResult] = useState("");
+  const [progressData, setProgressData] = useState([]);
+
+  const userId = 1; // Replace with the logged-in user's ID
+
+  // Fetch user progress data on component load
+  useEffect(() => {
+    axios
+      .get(`/api/bmiRecords/${userId}`)
+      .then((response) => {
+        setProgressData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching progress data:", error);
+      });
+  }, [userId]);
 
   const calculateBMI = () => {
     const heightInInches = parseInt(feet || 0) * 12 + parseInt(inches || 0);
@@ -26,6 +42,26 @@ function BMICalculator() {
       }
 
       setBmiResult(`Your BMI is ${bmi.toFixed(1)} (${category}).`);
+
+      // Save the result to the database
+      const record = {
+        userId: userId,
+        height_feet: parseInt(feet),
+        height_inches: parseInt(inches),
+        weight_lbs: parseFloat(weight),
+        bmi: bmi.toFixed(2),
+        bmi_category: category,
+      };
+
+      axios
+        .post("/api/bmiRecords", record)
+        .then((response) => {
+          // Update progress data with the new record
+          setProgressData((prevData) => [response.data, ...prevData]);
+        })
+        .catch((error) => {
+          console.error("Error saving BMI record:", error);
+        });
     } else {
       setBmiResult("Please enter valid values.");
     }
@@ -83,7 +119,16 @@ function BMICalculator() {
               </tr>
             </thead>
             <tbody>
-              {/* Table rows will be dynamically populated with user data */}
+              {progressData.map((record) => (
+                <tr key={record.id}>
+                  <td>{new Date(record.calculated_at).toLocaleDateString()}</td>
+                  <td>{record.heightFeet}</td>
+                  <td>{record.heightInches}</td>
+                  <td>{record.weightLbs}</td>
+                  <td>{record.bmi}</td>
+                  <td>{record.bmiCategory}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
