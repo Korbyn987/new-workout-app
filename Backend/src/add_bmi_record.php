@@ -1,17 +1,28 @@
 <?php
-require 'config.php'; // Include your database connection file.
-header("Access-Control-Allow-Origin: *");
+require 'connection.php'; // Include your database connection file.
+
+// Access Control Headers
+header("Access-Control-Allow-Origin: *"); // Consider restricting to specific origins in production.
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user_id = $_POST['user_id'];
-    $height_feet = $_POST['height_feet'];
-    $height_inches = $_POST['height_inches'];
-    $weight_lbs = $_POST['weight_lbs'];
-    $bmi = $_POST['bmi'];
-    $bmi_category = $_POST['bmi_category'];
+    // Validate and sanitize inputs
+    $user_id = filter_input(INPUT_POST, 'user_id', FILTER_VALIDATE_INT);
+    $height_feet = filter_input(INPUT_POST, 'height_feet', FILTER_VALIDATE_INT);
+    $height_inches = filter_input(INPUT_POST, 'height_inches', FILTER_VALIDATE_INT);
+    $weight_lbs = filter_input(INPUT_POST, 'weight_lbs', FILTER_VALIDATE_FLOAT);
+    $bmi = filter_input(INPUT_POST, 'bmi', FILTER_VALIDATE_FLOAT);
+    $bmi_category = filter_input(INPUT_POST, 'bmi_category', FILTER_SANITIZE_STRING);
 
+    // Check for missing or invalid inputs
+    if (!$user_id || !$height_feet || !$height_inches || !$weight_lbs || !$bmi || !$bmi_category) {
+        http_response_code(400); // Bad Request
+        echo json_encode(["success" => false, "message" => "Invalid or missing input data."]);
+        exit;
+    }
+
+    // Prepare and execute the insert query
     $query = "INSERT INTO bmi_records (user_id, height_feet, height_inches, weight_lbs, bmi, bmi_category) 
               VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($query);
@@ -30,12 +41,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($result->num_rows > 0) {
             $record = $result->fetch_assoc();
+            http_response_code(201); // Created
             echo json_encode(["success" => true, "message" => "BMI record added successfully.", "record" => $record]);
         } else {
+            http_response_code(500); // Internal Server Error
             echo json_encode(["success" => false, "message" => "Failed to retrieve the added record."]);
         }
     } else {
-        echo json_encode(["success" => false, "message" => "Failed to add BMI record."]);
+        http_response_code(500); // Internal Server Error
+        echo json_encode(["success" => false, "message" => "Failed to add BMI record.", "error" => $stmt->error]);
     }
+} else {
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(["success" => false, "message" => "Invalid request method."]);
 }
 ?>

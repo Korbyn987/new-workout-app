@@ -4,11 +4,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function BMICalculator() {
-  const [feet, setFeet] = useState("");
-  const [inches, setInches] = useState("");
-  const [weight, setWeight] = useState("");
-  const [bmiResult, setBmiResult] = useState("");
-  const [progressData, setProgressData] = useState([]);
+  const [feet, setFeet] = useState(""); // Height in feet
+  const [inches, setInches] = useState(""); // Height in inches
+  const [weight, setWeight] = useState(""); // Weight in pounds
+  const [bmiResult, setBmiResult] = useState(""); // BMI calculation result
+  const [progressData, setProgressData] = useState([]); // User's BMI records
 
   const userId = 1; // Replace with the logged-in user's ID
 
@@ -25,12 +25,15 @@ function BMICalculator() {
   }, [userId]);
 
   const calculateBMI = () => {
-    const heightInInches = parseInt(feet || 0) * 12 + parseInt(inches || 0);
-    const weightInLbs = parseFloat(weight || 0);
+    const heightInInches = parseInt(feet || 0) * 12 + parseInt(inches || 0); // Height in total inches
+    const weightInLbs = parseFloat(weight || 0); // Weight in pounds
+
+    // Validate inputs
     if (heightInInches > 0 && weightInLbs > 0) {
-      const bmi = (weightInLbs / (heightInInches * heightInInches)) * 703;
+      const bmi = (weightInLbs / (heightInInches * heightInInches)) * 703; // BMI formula
       let category = "";
 
+      // Determine BMI category
       if (bmi < 18.5) {
         category = "Underweight";
       } else if (bmi < 24.9) {
@@ -46,11 +49,11 @@ function BMICalculator() {
       // Save the result to the database
       const record = {
         userId: userId,
-        height_feet: parseInt(feet),
-        height_inches: parseInt(inches),
-        weight_lbs: parseFloat(weight),
-        bmi: bmi.toFixed(2),
-        bmi_category: category,
+        height_feet: parseInt(feet), // Save height in feet
+        height_inches: parseInt(inches), // Save height in inches
+        weight_lbs: parseFloat(weight), // Save weight in pounds
+        bmi: bmi.toFixed(2), // Save BMI value
+        bmi_category: category, // Save BMI category
       };
 
       axios
@@ -63,7 +66,7 @@ function BMICalculator() {
           console.error("Error saving BMI record:", error);
         });
     } else {
-      setBmiResult("Please enter valid values.");
+      setBmiResult("Please enter valid values."); // Show error for invalid inputs
     }
   };
 
@@ -121,12 +124,15 @@ function BMICalculator() {
             <tbody>
               {progressData.map((record) => (
                 <tr key={record.id}>
-                  <td>{new Date(record.calculated_at).toLocaleDateString()}</td>
-                  <td>{record.heightFeet}</td>
-                  <td>{record.heightInches}</td>
-                  <td>{record.weightLbs}</td>
-                  <td>{record.bmi}</td>
-                  <td>{record.bmiCategory}</td>
+                  <td>
+                    {new Date(record.calculated_at).toLocaleDateString()}{" "}
+                    {/* Display readable date */}
+                  </td>
+                  <td>{record.height_feet}</td> {/* Match database field */}
+                  <td>{record.height_inches}</td> {/* Match database field */}
+                  <td>{record.weight_lbs}</td> {/* Match database field */}
+                  <td>{record.bmi}</td> {/* Match database field */}
+                  <td>{record.bmi_category}</td> {/* Match database field */}
                 </tr>
               ))}
             </tbody>
