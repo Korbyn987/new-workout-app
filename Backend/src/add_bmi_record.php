@@ -1,5 +1,5 @@
 <?php
-require 'connection.php'; // Include your database connection file.
+require 'connection.php'; 
 
 // Access Control Headers
 header("Access-Control-Allow-Origin: *"); // Consider restricting to specific origins in production.
