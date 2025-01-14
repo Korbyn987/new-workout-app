@@ -1,5 +1,5 @@
 <?php
-require 'connection.php'; // Include your database connection file.
+require 'connection.php'; 
 
 // Access Control Headers
 header("Access-Control-Allow-Origin: *"); // Consider restricting to specific origins in production.
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $query = "INSERT INTO bmi_records (user_id, height_feet, height_inches, weight_lbs, bmi, bmi_category) 
               VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("iiiiis", $user_id, $height_feet, $height_inches, $weight_lbs, $bmi, $bmi_category);
+    $stmt->bind_param("iiidds", $user_id, $height_feet, $height_inches, $weight_lbs, $bmi, $bmi_category);
 
     if ($stmt->execute()) {
         // Fetch the last inserted record ID
