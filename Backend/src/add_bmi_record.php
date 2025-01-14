@@ -16,9 +16,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $bmi_category = filter_input(INPUT_POST, 'bmi_category', FILTER_SANITIZE_STRING);
 
     // Check for missing or invalid inputs
-    if (!$user_id || !$height_feet || !$height_inches || !$weight_lbs || !$bmi || !$bmi_category) {
+    if ($user_id === false || $height_feet === false || $height_inches === false || 
+        $weight_lbs === false || $bmi === false || empty($bmi_category)) {
         http_response_code(400); // Bad Request
         echo json_encode(["success" => false, "message" => "Invalid or missing input data."]);
+        exit;
+    }
+
+    // Add additional validation checks
+    if ($user_id <= 0 || $height_feet < 0 || $height_inches < 0 || $height_inches >= 12 || $weight_lbs <= 0 || $bmi <= 0) {
+        http_response_code(400); // Bad Request
+        echo json_encode(["success" => false, "message" => "Invalid input ranges."]);
         exit;
     }
 
