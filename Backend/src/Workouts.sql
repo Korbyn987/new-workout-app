@@ -16,7 +16,7 @@ CREATE TABLE members(
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE,
     age INT,
-    gender ENUM('Male,', 'Female', 'Other'),
+    gender ENUM('Male', 'Female', 'Other'),
     join_date DATE
 
 );

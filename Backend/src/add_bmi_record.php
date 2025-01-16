@@ -6,6 +6,10 @@ header("Access-Control-Allow-Origin: *"); // Consider restricting to specific or
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validate and sanitize inputs
     $user_id = filter_input(INPUT_POST, 'user_id', FILTER_VALIDATE_INT);
@@ -16,9 +20,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $bmi_category = filter_input(INPUT_POST, 'bmi_category', FILTER_SANITIZE_STRING);
 
     // Check for missing or invalid inputs
-    if (!$user_id || !$height_feet || !$height_inches || !$weight_lbs || !$bmi || !$bmi_category) {
+    if ($user_id === false || $height_feet === false || $height_inches === false || 
+        $weight_lbs === false || $bmi === false || empty($bmi_category)) {
         http_response_code(400); // Bad Request
         echo json_encode(["success" => false, "message" => "Invalid or missing input data."]);
+        exit;
+    }
+
+    // Add additional validation checks
+    if ($user_id <= 0 || $height_feet < 0 || $height_inches < 0 || $height_inches >= 12 || $weight_lbs <= 0 || $bmi <= 0) {
+        http_response_code(400); // Bad Request
+        echo json_encode(["success" => false, "message" => "Invalid input ranges."]);
         exit;
     }
 
@@ -26,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $query = "INSERT INTO bmi_records (user_id, height_feet, height_inches, weight_lbs, bmi, bmi_category) 
               VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("iiiiis", $user_id, $height_feet, $height_inches, $weight_lbs, $bmi, $bmi_category);
+    $stmt->bind_param("iiidds", $user_id, $height_feet, $height_inches, $weight_lbs, $bmi, $bmi_category);
 
     if ($stmt->execute()) {
         // Fetch the last inserted record ID

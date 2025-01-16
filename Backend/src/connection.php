@@ -20,6 +20,4 @@ echo "Connection Successful";
 
 $conn->set_charset("utf8");
 
-// Return connection 
-return $conn;
 ?>
