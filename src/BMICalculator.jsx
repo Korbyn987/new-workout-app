@@ -15,9 +15,15 @@ function BMICalculator() {
   // Fetch user progress data on component load
   useEffect(() => {
     axios
-      .get(`/api/bmiRecords/${userId}`)
+      .get(
+        `http://localhost/new-workout-app/Backend/src/get_bmi_records.php?user_id=${userId}`
+      )
       .then((response) => {
-        setProgressData(response.data);
+        if (response.data.success) {
+          setProgressData(response.data.records);
+        } else {
+          console.error("No records found for the given user ID.");
+        }
       })
       .catch((error) => {
         console.error("Error fetching progress data:", error);
@@ -57,10 +63,34 @@ function BMICalculator() {
       };
 
       axios
-        .post("/api/bmiRecords", record)
+        .post(
+          "http://localhost/new-workout-app/Backend/src/add_bmi_record.php",
+          record,
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            transformRequest: [
+              (data) => {
+                return Object.keys(data)
+                  .map(
+                    (key) =>
+                      encodeURIComponent(key) +
+                      "=" +
+                      encodeURIComponent(data[key])
+                  )
+                  .join("&");
+              },
+            ],
+          }
+        )
         .then((response) => {
-          // Update progress data with the new record
-          setProgressData((prevData) => [response.data, ...prevData]);
+          if (response.data.success) {
+            // Update progress data with the new record
+            setProgressData((prevData) => [response.data.record, ...prevData]);
+          } else {
+            console.error("Error adding BMI record:", response.data.message);
+          }
         })
         .catch((error) => {
           console.error("Error saving BMI record:", error);
@@ -126,13 +156,12 @@ function BMICalculator() {
                 <tr key={record.id}>
                   <td>
                     {new Date(record.calculated_at).toLocaleDateString()}{" "}
-                    {/* Display readable date */}
                   </td>
-                  <td>{record.height_feet}</td> {/* Match database field */}
-                  <td>{record.height_inches}</td> {/* Match database field */}
-                  <td>{record.weight_lbs}</td> {/* Match database field */}
-                  <td>{record.bmi}</td> {/* Match database field */}
-                  <td>{record.bmi_category}</td> {/* Match database field */}
+                  <td>{record.height_feet}</td>
+                  <td>{record.height_inches}</td>
+                  <td>{record.weight_lbs}</td>
+                  <td>{record.bmi}</td>
+                  <td>{record.bmi_category}</td>
                 </tr>
               ))}
             </tbody>
