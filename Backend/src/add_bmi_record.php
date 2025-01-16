@@ -2,7 +2,7 @@
 require 'connection.php'; 
 
 // Access Control Headers
-header("Access-Control-Allow-Origin: *"); // Consider restricting to specific origins in production.
+header("Access-Control-Allow-Origin: http://localhost:3000");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 

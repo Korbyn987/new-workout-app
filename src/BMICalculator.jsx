@@ -54,7 +54,7 @@ function BMICalculator() {
 
       // Save the result to the database
       const record = {
-        userId: userId,
+        user_Id: userId,
         height_feet: parseInt(feet), // Save height in feet
         height_inches: parseInt(inches), // Save height in inches
         weight_lbs: parseFloat(weight), // Save weight in pounds
