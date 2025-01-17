@@ -9,7 +9,7 @@ function Trainers() {
         <h2>Meet Our Trainers</h2>
 
         <div className="trainer-info">
-          <img src="cbum_image.jpg" alt="Trainer 1" />
+          <img src="src/images/cbum_image.jpg" alt="Trainer 1" />
           <div className="text">
             <h3>Chris Bumstead</h3>
             <p>Degree: Bachelor of Science in Exercise Science</p>

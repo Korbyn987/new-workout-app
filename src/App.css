@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -326,24 +330,31 @@ th {
   max-width: 800px;
   margin: 20px auto;
   padding: 20px;
-  background-color: grey;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.9); /* Matte black background */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 0 20px 5px #8a2be2, 0 0 40px 10px #8a2be2; /* Purple neon glow */
+  color: #d8bfff; /* Softer purple text */
 }
 
 .trainer h2 {
   text-align: center;
   margin-bottom: 20px;
+  color: #d8bfff; /* Softer purple for header text */
+  text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2; /* Glow effect on header */
 }
 
 .trainer-info {
   display: flex;
   margin-bottom: 20px;
+  border-bottom: 1px solid rgba(138, 43, 226, 0.6); /* Purple accent for row separator */
+  padding-bottom: 15px;
 }
 
 .trainer-info img {
   max-width: 150px;
   margin-right: 20px;
+  border-radius: 8px; /* Rounded corners for images */
+  box-shadow: 0 0 15px #8a2be2; /* Glow around images */
 }
 
 .trainer-info .text {
@@ -352,76 +363,15 @@ th {
 
 .trainer-info h3 {
   margin-bottom: 10px;
+  color: #ffffff; /* White text for names */
+  text-shadow: 0 0 5px #8a2be2; /* Subtle glow on names */
 }
 
 .trainer-info p {
   margin-bottom: 5px;
-}
-.nutrition-info {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: grey;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #d8bfff; /* Softer purple for descriptions */
 }
 
-.nutrition-info h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.good-diet,
-.bulking-foods,
-.cutting-foods {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: grey;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.good-diet h2,
-.bulking-foods h2,
-.cutting-foods h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.good-diet ul,
-.bulking-foods ul,
-.cutting-foods ul {
-  padding: 0;
-  list-style: none;
-}
-
-.good-diet li,
-.bulking-foods li,
-.cutting-foods li {
-  margin-bottom: 10px;
-}
-
-.good-diet li::before,
-.bulking-foods li::before,
-.cutting-foods li::before {
-  content: "\2022";
-  color: #333;
-  font-weight: bold;
-  display: inline-block;
-  width: 1em;
-  margin-left: -1em;
-}
-
-.good-diet p,
-.bulking-foods p,
-.cutting-foods p {
-  margin-top: 20px;
-}
-
-.nutrition-info p {
-  margin-top: 20px;
-}
 .login-container {
   max-width: 520px;
   margin: 100px auto;
@@ -637,90 +587,6 @@ cite {
   border: 1px solid #8a2be2; /* Neon border */
 }
 
-.recipe-container {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.recipe {
-  margin-bottom: 20px;
-}
-
-.recipe-btn {
-  background-color: #f0f0f0;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-}
-
-.recipe-dropdown {
-  display: none;
-  padding-left: 20px;
-}
-
-.ingredients-list {
-  list-style-type: none;
-  color: white;
-  padding: 0;
-  margin: 0;
-}
-
-.ingredients-list li {
-  margin-bottom: 5px;
-}
-
-.recipe-btn.active + .recipe-dropdown {
-  display: block;
-}
-.recipe-box {
-  background-color: #444; /* Dark grey background */
-  color: white; /* White text color */
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-}
-
-.recipe-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.recipe-description {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.recipe-btn {
-  cursor: pointer;
-  background-color: #333; /* Darker grey button */
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
-.recipe-btn:hover {
-  background-color: grey; /* Dark grey on hover */
-}
-
-.recipe-dropdown {
-  display: none;
-  padding-left: 20px;
-}
-
-.recipe-dropdown-item {
-  margin-bottom: 5px;
-}
-.recipe-container {
-  background-color: #f2f2f2;
-  padding: 20px;
-  margin-top: 20px;
-  border-radius: 10px;
-}
 .gym-button {
   background: #1a1a1a; /* Matte black background */
   color: #fff; /* White text for contrast */
@@ -756,4 +622,119 @@ cite {
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px; /* Space between buttons */
+}
+
+/* This portion is for the Nutrition's page    */
+.recipe-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px; /* Space between containers */
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.9); /* Matte black background */
+  border-radius: 10px;
+  box-shadow: 0 0 20px 5px #8a2be2, 0 0 40px 10px #8a2be2; /* Purple neon glow */
+}
+
+#recipe-type {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.9); /* Matte black background */
+  border-radius: 10px;
+  box-shadow: 0 0 20px 5px #8a2be2, 0 0 40px 10px #8a2be2; /* Purple neon glow */
+  color: #d8bfff; /* Softer purple text */
+  font-size: 18px;
+  text-align: center;
+}
+
+.recipe-box {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.9); /* Matte black background */
+  color: #d8bfff; /* Softer purple text */
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(138, 43, 226, 0.6); /* Purple border */
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.8); /* Neon glow effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recipe-box:hover {
+  transform: translateY(-10px) scale(1.05); /* Slight lift on hover */
+  box-shadow: 0 0 30px rgba(138, 43, 226, 1); /* Stronger glow on hover */
+}
+
+.recipe-box:nth-child(odd) {
+  transform: translateX(-10%); /* Shift odd containers left */
+}
+
+.recipe-box:nth-child(even) {
+  transform: translateX(10%); /* Shift even containers right */
+}
+
+.recipe-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #d8bfff; /* Softer purple for titles */
+  text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2; /* Glow effect */
+}
+
+.recipe-description {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #bfa3ff; /* Light purple text */
+}
+
+.recipe-btn {
+  cursor: pointer;
+  background: linear-gradient(45deg, #8a2be2, #c299ff); /* Gradient button */
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recipe-btn:hover {
+  background: linear-gradient(45deg, #c299ff, #8a2be2); /* Reverse gradient */
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.8); /* Glow on hover */
+}
+
+.ingredients-list {
+  list-style-type: none;
+  color: #d8bfff; /* Softer purple text for list items */
+  padding: 0;
+  margin: 0;
+}
+
+.ingredients-list li {
+  margin-bottom: 5px;
+}
+
+.nutrition-info,
+.good-diet,
+.bulking-foods,
+.cutting-foods {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.9); /* Matte black background */
+  border-radius: 10px;
+  box-shadow: 0 0 20px 5px #8a2be2, 0 0 40px 10px #8a2be2; /* Purple neon glow */
+  color: #d8bfff; /* Softer purple text */
+}
+
+.nutrition-info h2,
+.good-diet h2,
+.bulking-foods h2,
+.cutting-foods h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #d8bfff; /* Softer purple for headers */
+  text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2; /* Glow effect on headers */
 }
