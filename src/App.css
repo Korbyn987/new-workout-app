@@ -13,11 +13,11 @@ h6 {
   color: white; /*main text color   */
 }
 a {
-  color: #e41e26; /* red for links */
+  color: #680fbf; /* red for links */
   text-decoration: none;
 }
 a:hover {
-  color: #d42e34;
+  color: #ff00ff;
 }
 header {
   background-image: url("images/PurpleGymHeader.webp");
@@ -212,14 +212,47 @@ input {
   max-width: 570px;
   margin: 20px auto;
   padding: 20px;
-  background-color: grey;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.9); /* Slightly darker matte black */
+  border-radius: 10px; /* Rounded edges for a modern look */
+  border: 2px solid transparent; /* Border to apply the glow effect */
+  box-shadow: 0 0 20px 5px #8a2be2, 0 0 40px 10px #8a2be2; /* Neon purple glow effect */
+  color: #d8bfff; /* Softer purple for text to complement the glow */
+  text-shadow: 0 0 5px #8a2be2; /* Optional text glow for a subtle effect */
 }
 
 .schedule h2 {
   text-align: center;
   margin-bottom: 20px;
+  color: #d8bfff; /* Matching text color for headings */
+  text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2; /* Glow effect on heading text */
+}
+
+.schedule p,
+.schedule ul {
+  color: #d8bfff; /* Text color for other elements */
+  line-height: 1.6; /* Improved readability */
+}
+
+.schedule ul {
+  list-style: none; /* Remove default bullets */
+  padding-left: 0;
+}
+
+.schedule ul li {
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  background-color: rgba(
+    138,
+    43,
+    226,
+    0.2
+  ); /* Subtle purple highlight for list items */
+  border-radius: 5px;
+}
+
+.schedule ul li:hover {
+  background-color: rgba(138, 43, 226, 0.4); /* Slightly darker on hover */
+  transition: background-color 0.3s ease;
 }
 
 table {
@@ -235,8 +268,8 @@ td {
 }
 
 th {
-  background-color: #333;
-  color: #fff;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #8a2be2;
 }
 
 .dropdown {
@@ -390,12 +423,13 @@ th {
   margin-top: 20px;
 }
 .login-container {
-  max-width: 400px;
+  max-width: 520px;
   margin: 100px auto;
-  padding: 20px;
+  padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  background-color: grey;
+
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 2px solid #8a2be2;
 }
 .login-container h2 {
   text-align: center;
@@ -418,19 +452,24 @@ th {
 .btn {
   display: block;
   width: 100%;
-  padding: 10px;
+  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   border: none;
   border-radius: 5px;
-  background-color: #333;
+  background-color: #680fbf;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
 }
 .btn:hover {
-  background-color: #555;
+  background: #680fbf; /* Purple glow effect on hover */
+  color: #fff; /* Black text for contrast */
+  box-shadow: 0 0 15px #ff00ff, 0 0 25px #680fbf, 0 0 40px #ff00ff;
 }
 .text-center {
   text-align: center;
+  color: #fff;
 }
 #testimonials {
   text-align: center;
