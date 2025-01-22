@@ -3061,7 +3061,7 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   position: relative;
   z-index: 9999;
 }
@@ -3112,9 +3112,14 @@ nav {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   backdrop-filter: blur(8px);
-  margin-top: 1rem;
+  margin: 0 auto; /* Center the nav bar horizontally */
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3),
     inset 0 0 20px rgba(183, 148, 244, 0.2);
+  width: fit-content; /* Ensure the nav takes only as much space as needed */
+  position: absolute; /* Position relative to the .galaxy-header */
+  bottom: 10px; /* Align it at the bottom */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Correct centering */
 }
 
 .gym-button {
@@ -4070,7 +4075,4 @@ main {
   50% {
     opacity: 1;
   }
-}
-main {
-  padding-top: 200px; /* Adjust this value based on the height of the header */
 }
