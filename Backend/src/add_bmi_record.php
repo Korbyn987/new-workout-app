@@ -5,19 +5,35 @@ require 'connection.php';
 header("Access-Control-Allow-Origin: http://localhost:3000");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// Handle preflight requests
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get JSON input
+    $json = file_get_contents('php://input');
+    $data = json_decode($json, true);
+
+    if ($data === null) {
+        // Try to get form data if JSON parsing fails
+        $data = $_POST;
+    }
+
     // Validate and sanitize inputs
-    $user_id = filter_input(INPUT_POST, 'user_id', FILTER_VALIDATE_INT);
-    $height_feet = filter_input(INPUT_POST, 'height_feet', FILTER_VALIDATE_INT);
-    $height_inches = filter_input(INPUT_POST, 'height_inches', FILTER_VALIDATE_INT);
-    $weight_lbs = filter_input(INPUT_POST, 'weight_lbs', FILTER_VALIDATE_FLOAT);
-    $bmi = filter_input(INPUT_POST, 'bmi', FILTER_VALIDATE_FLOAT);
-    $bmi_category = filter_input(INPUT_POST, 'bmi_category', FILTER_SANITIZE_STRING);
+    $user_id = filter_var($data['user_id'] ?? null, FILTER_VALIDATE_INT);
+    $height_feet = filter_var($data['height_feet'] ?? null, FILTER_VALIDATE_INT);
+    $height_inches = filter_var($data['height_inches'] ?? null, FILTER_VALIDATE_INT);
+    $weight_lbs = filter_var($data['weight_lbs'] ?? null, FILTER_VALIDATE_FLOAT);
+    $bmi = filter_var($data['bmi'] ?? null, FILTER_VALIDATE_FLOAT);
+    $bmi_category = htmlspecialchars($data['bmi_category'] ?? '', ENT_QUOTES, 'UTF-8');
 
     // Check for missing or invalid inputs
     if ($user_id === false || $height_feet === false || $height_inches === false || 

@@ -1,132 +1,137 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./App.css"; // Make sure to adjust the path to your stylesheet if necessary
+import "./App.css";
 
 const TheFactoryMainPage = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   return (
-    <>
-      <section id="about" className="section">
-        <h2>About us:</h2>
-        <p>
-          Welcome to The Factory, where fitness meets community! At our gym,
-          we're more than just a place to work out – we're a supportive and
-          inclusive community dedicated to helping you achieve your fitness
-          goals. With state-of-the-art facilities, a wide range of classes led
-          by expert trainers, and personalized workout plans tailored to your
-          needs, we're here to guide you on your fitness journey every step of
-          the way. Whether you're a seasoned athlete or just starting out, our
-          welcoming atmosphere and friendly staff will make you feel right at
-          home. Join us today and discover the difference that The Factory can
-          make in your life – because together, we're stronger!
-        </p>
+    <div className="main-page-container">
+      {/* Hero Section */}
+      <section className="hero-section">
+        <div className="hero-content">
+          <h1 className="hero-title">Welcome to The Factory</h1>
+          <p className="hero-subtitle">Where Fitness Meets Innovation</p>
+          <div className="hero-cta">
+            <Link to="/signup" className="cta-button primary">Get Started</Link>
+            <Link to="/programs" className="cta-button secondary">View Programs</Link>
+          </div>
+        </div>
+        <div className="hero-overlay"></div>
       </section>
 
-      <section id="fitness-challenges" className="section">
-        <h2>Fitness Challenges</h2>
-
-        <h3>30-Day Abs Challenge</h3>
-        <p>
-          A challenge focused on strengthening and toning the abdominal muscles.
-          Each day participants follow a set of exercises targeting different
-          areas of the core, gradually increasing in intensity over 30 days.
-        </p>
-
-        <h3>Couch to 5K Challenge</h3>
-        <p>
-          Perfect for beginners who want to start running. This challenge
-          provides a structured training plan that gradually builds up
-          endurance, starting with a mix of walking and running intervals,
-          leading up to completing a 5K (3.1 miles) run.
-        </p>
-
-        <h3>Plank Challenge</h3>
-        <p>
-          Participants aim to increase their plank hold time over a set period,
-          such as 30 days. Starting with short durations and gradually
-          increasing, this challenge helps improve core strength, stability, and
-          endurance.
-        </p>
-
-        <h3>Push-Up Challenge</h3>
-        <p>
-          A challenge focused on improving upper body strength and endurance by
-          gradually increasing the number of push-ups performed each day over a
-          set period, like 30 days.
-        </p>
-
-        <h3>Burpee Challenge</h3>
-        <p>
-          This challenge involves progressively increasing the number of burpees
-          performed each day for a set period. Burpees are a full-body exercise
-          that combines strength, cardio, and agility training.
-        </p>
-
-        <h3>Water Intake Challenge</h3>
-        <p>
-          Staying hydrated is essential for overall health and fitness.
-          Participants track their daily water intake and aim to reach a
-          specified goal, such as drinking a certain number of glasses or liters
-          of water per day for a week or a month.
-        </p>
-      </section>
-
-      <section id="testimonials" className="section">
-        <div className="testimonial">
-          <img src="images/Sara_image.webp" alt="Avatar" className="avatar" />
-          <blockquote>
-            <p>
-              "Joining The Factory was the best decision I ever made for my
-              fitness journey. With the guidance of the amazing trainers and the
-              supportive community, I was able to achieve my weight loss goals
-              and build strength I never thought possible. The Factory truly
-              changed my life!"
-            </p>
-          </blockquote>
-          <cite>- Sarah J., Member since 2022</cite>
+      {/* Features Grid */}
+      <section className={`features-grid ${isVisible ? 'fade-in' : ''}`}>
+        <div className="feature-card">
+          <div className="feature-icon">💪</div>
+          <h3>Expert Training</h3>
+          <p>Personalized workout plans designed by certified professionals</p>
+        </div>
+        <div className="feature-card">
+          <div className="feature-icon">🎯</div>
+          <h3>Goal Tracking</h3>
+          <p>Advanced metrics to monitor your progress</p>
+        </div>
+        <div className="feature-card">
+          <div className="feature-icon">🥗</div>
+          <h3>Nutrition Guide</h3>
+          <p>Customized meal plans for optimal results</p>
+        </div>
+        <div className="feature-card">
+          <div className="feature-icon">👥</div>
+          <h3>Community</h3>
+          <p>Join a supportive network of fitness enthusiasts</p>
         </div>
       </section>
 
-      <section id="upcoming-events" className="section">
-        <h2>Upcoming Events</h2>
-
-        <div className="event">
-          <h3>Circuit Training Workshop</h3>
-          <p>Date: April 25th, 2024</p>
-          <p>Time: 10:00 AM - 12:00 PM</p>
+      {/* About Section */}
+      <section className="about-section glass-morphism">
+        <div className="about-content">
+          <h2>About The Factory</h2>
           <p>
-            Description: Join us for an intensive circuit training workshop led
-            by our expert trainers. Learn new exercises, techniques, and
-            routines to supercharge your fitness regimen.
-          </p>
-        </div>
-
-        <div className="event">
-          <h3>Yoga Retreat</h3>
-          <p>Date: May 10th - May 12th, 2024</p>
-          <p>Time: 8:00 AM - 6:00 PM (Each Day)</p>
-          <p>
-            Description: Immerse yourself in a rejuvenating yoga retreat
-            weekend. Disconnect from the stresses of daily life and reconnect
-            with your mind, body, and spirit through yoga and meditation.
-          </p>
-        </div>
-
-        <div className="event">
-          <h3>Outdoor Bootcamp</h3>
-          <p>Date: June 5th, 2024</p>
-          <p>Time: 6:00 PM - 7:00 PM</p>
-          <p>
-            Description: Challenge yourself with our outdoor bootcamp session.
-            Push your limits and enjoy a high-intensity workout in the fresh air
-            with our supportive community.
+            Welcome to The Factory, where fitness meets community! We're more than just a gym – 
+            we're a supportive and inclusive community dedicated to helping you achieve your fitness goals. 
+            With state-of-the-art facilities and expert trainers, we're here to guide you on your 
+            fitness journey every step of the way.
           </p>
         </div>
       </section>
 
-      <footer>
-        <p>&copy; 2024 The Factory. All rights reserved.</p>
-      </footer>
-    </>
+      {/* Challenges Section */}
+      <section className="challenges-section">
+        <h2>Current Challenges</h2>
+        <div className="challenges-grid">
+          <div className="challenge-card">
+            <div className="challenge-header">
+              <h3>30-Day Abs Challenge</h3>
+              <span className="difficulty">Intermediate</span>
+            </div>
+            <p>Transform your core with our progressive ab workout program</p>
+            <div className="challenge-stats">
+              <span>🏃 30 days</span>
+              <span>💪 Core Focus</span>
+              <span>🔥 Daily Tasks</span>
+            </div>
+          </div>
+
+          <div className="challenge-card">
+            <div className="challenge-header">
+              <h3>Couch to 5K</h3>
+              <span className="difficulty">Beginner</span>
+            </div>
+            <p>Start your running journey with our structured training plan</p>
+            <div className="challenge-stats">
+              <span>🏃 8 weeks</span>
+              <span>💪 Cardio</span>
+              <span>🔥 Progressive</span>
+            </div>
+          </div>
+
+          <div className="challenge-card">
+            <div className="challenge-header">
+              <h3>Strength Master</h3>
+              <span className="difficulty">Advanced</span>
+            </div>
+            <p>Push your limits with our intensive strength program</p>
+            <div className="challenge-stats">
+              <span>🏃 6 weeks</span>
+              <span>💪 Full Body</span>
+              <span>🔥 High Intensity</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="testimonials-section">
+        <h2>Success Stories</h2>
+        <div className="testimonials-grid">
+          <div className="testimonial-card">
+            <div className="testimonial-content">
+              <p>"The Factory transformed my approach to fitness. The trainers are amazing!"</p>
+              <div className="testimonial-author">
+                <span className="author-name">Sarah J.</span>
+                <span className="author-achievement">Lost 30 lbs in 6 months</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="testimonial-card">
+            <div className="testimonial-content">
+              <p>"Best gym community I've ever been part of. The support is incredible!"</p>
+              <div className="testimonial-author">
+                <span className="author-name">Mike R.</span>
+                <span className="author-achievement">Gained 15 lbs muscle mass</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 

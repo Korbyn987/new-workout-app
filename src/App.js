@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Layout from "./Layout";
 import TheFactoryMainPage from "./TheFactoryMainPage";
@@ -10,13 +10,13 @@ import Trainers from "./Trainers";
 import Nutrition from "./Nutrition";
 import Login from "./Login";
 import Signup from "./Signup";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   const [feet, setFeet] = useState("");
   const [inches, setInches] = useState("");
   const [weight, setWeight] = useState("");
   const [bmiResult, setBmiResult] = useState("");
-  const [dropdowns, setDropdowns] = useState({});
 
   const calculateBMI = () => {
     const feetNum = parseFloat(feet);
@@ -33,42 +33,37 @@ function App() {
     setBmiResult(`Your BMI is: ${bmi.toFixed(2)}`);
   };
 
-  const toggleDropdown = (bodyPart) => {
-    setDropdowns((prev) => ({
-      ...prev,
-      [bodyPart]: !prev[bodyPart],
-    }));
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!event.target.matches(".dropbtn")) {
-        setDropdowns({});
-      }
-    };
-    window.addEventListener("click", handleClickOutside);
-
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
   return (
-    <Routes>
-      {/* Wrap all routes under the Layout component */}
-      <Route path="/" element={<Layout />}>
-        <Route index element={<TheFactoryMainPage />} />
-        <Route path="Workouts" element={<Workouts />} />
-        <Route path="BMICalculator" element={<BMICalculator />} />
-        <Route path="Schedule" element={<Schedule />} />
-        <Route path="Trainers" element={<Trainers />} />
-        <Route path="Nutrition" element={<Nutrition />} />
-      </Route>
-
-      {/* Auth routes do not use the Layout */}
-      <Route path="/Login" element={<Login />} />
-      <Route path="/Signup" element={<Signup />} />
-    </Routes>
+    <AuthProvider>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Layout><TheFactoryMainPage /></Layout>} />
+          <Route path="/workouts" element={<Layout><Workouts /></Layout>} />
+          <Route
+            path="/bmi-calculator"
+            element={
+              <Layout>
+                <BMICalculator
+                  feet={feet}
+                  inches={inches}
+                  weight={weight}
+                  setFeet={setFeet}
+                  setInches={setInches}
+                  setWeight={setWeight}
+                  calculateBMI={calculateBMI}
+                  bmiResult={bmiResult}
+                />
+              </Layout>
+            }
+          />
+          <Route path="/schedule" element={<Layout><Schedule /></Layout>} />
+          <Route path="/trainers" element={<Layout><Trainers /></Layout>} />
+          <Route path="/nutrition" element={<Layout><Nutrition /></Layout>} />
+          <Route path="/login" element={<Layout><Login /></Layout>} />
+          <Route path="/signup" element={<Layout><Signup /></Layout>} />
+        </Routes>
+      </div>
+    </AuthProvider>
   );
 }
 

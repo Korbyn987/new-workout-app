@@ -1,51 +1,108 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "./context/AuthContext";
 import "./App.css";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Add login logic here, e.g., send data to an API
-    console.log("Logging in with:", { username, password });
+    setError("");
+    setIsLoading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("password", password);
+
+      const response = await fetch("http://localhost/new-workout-app/Backend/src/login.php", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.error) {
+        setError(data.error);
+      } else {
+        // Successful login
+        login(data.user);
+        navigate("/");
+      }
+    } catch (err) {
+      setError("An error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <div className="input-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
+    <div className="auth-container">
+      <div className="auth-card glass-morphism">
+        <div className="auth-header">
+          <h2>Welcome Back</h2>
+          <p>Login to continue your fitness journey</p>
         </div>
-        <div className="input-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+
+        {error && <div className="error-message">{error}</div>}
+
+        <form onSubmit={handleLogin} className="auth-form">
+          <div className="form-group">
+            <div className="input-wrapper">
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                className="auth-input"
+              />
+              <label htmlFor="username" className="floating-label">Username</label>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <div className="input-wrapper">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="auth-input"
+              />
+              <label htmlFor="password" className="floating-label">Password</label>
+            </div>
+          </div>
+
+          <button 
+            type="submit" 
+            className="auth-button" 
+            disabled={isLoading}
+          >
+            {isLoading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+
+        <div className="auth-footer">
+          <p>
+            Don't have an account?{" "}
+            <Link to="/signup" className="auth-link">
+              Sign up
+            </Link>
+          </p>
         </div>
-        <button type="submit" className="btn">
-          Login
-        </button>
-      </form>
-      <p className="text-center">
-        Don't have an account? <a href="/signup">Create one!!</a>
-      </p>
+      </div>
     </div>
   );
 }

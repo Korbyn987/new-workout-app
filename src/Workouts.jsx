@@ -1,135 +1,137 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Link } from "react-router-dom";
 
 function Workouts() {
-  const toggleDropdown = (id) => {
-    const dropdown = document.getElementById(`${id}Dropdown`);
-    dropdown.classList.toggle("show");
-  };
+  const [activeCategory, setActiveCategory] = useState(null);
+
+  const workoutCategories = [
+    {
+      id: "back",
+      title: "Back",
+      icon: "💪",
+      exercises: [
+        { name: "Pull-Ups", difficulty: "Intermediate" },
+        { name: "Deadlifts", difficulty: "Advanced" },
+        { name: "Seated Rows", difficulty: "Beginner" },
+        { name: "Bent Over Rows", difficulty: "Intermediate" },
+        { name: "Overhead Lat Pulldown", difficulty: "Beginner" },
+        { name: "Single Arm Lat Pulldown", difficulty: "Intermediate" }
+      ]
+    },
+    {
+      id: "biceps",
+      title: "Biceps",
+      icon: "💪",
+      exercises: [
+        { name: "Dumbbell Bicep Curls", difficulty: "Beginner" },
+        { name: "Hammer Curls", difficulty: "Beginner" },
+        { name: "Preacher Curl", difficulty: "Intermediate" },
+        { name: "Cable Curl", difficulty: "Beginner" },
+        { name: "Barbell Curl", difficulty: "Intermediate" }
+      ]
+    },
+    {
+      id: "chest",
+      title: "Chest",
+      icon: "🏋️",
+      exercises: [
+        { name: "Barbell Bench Press", difficulty: "Advanced" },
+        { name: "Dumbbell Bench Press", difficulty: "Intermediate" },
+        { name: "Chest Press", difficulty: "Beginner" },
+        { name: "Pec Dec Fly", difficulty: "Beginner" },
+        { name: "Cable Chest Press", difficulty: "Intermediate" },
+        { name: "Dips (Chest focused)", difficulty: "Advanced" }
+      ]
+    },
+    {
+      id: "triceps",
+      title: "Triceps",
+      icon: "💪",
+      exercises: [
+        { name: "Tricep Pulldowns", difficulty: "Beginner" },
+        { name: "Seated Tricep Pushdowns", difficulty: "Beginner" },
+        { name: "Single Arm Tricep Pulldown", difficulty: "Intermediate" },
+        { name: "Single Arm Tricep Kickback", difficulty: "Intermediate" },
+        { name: "Close Grip Bench Press", difficulty: "Advanced" },
+        { name: "Skull Crushers", difficulty: "Intermediate" },
+        { name: "Overhead Tricep Extensions", difficulty: "Intermediate" },
+        { name: "Diamond Pushups", difficulty: "Beginner" }
+      ]
+    },
+    {
+      id: "legs",
+      title: "Legs",
+      icon: "🦵",
+      exercises: [
+        { name: "Quad Focused Leg Press", difficulty: "Intermediate" },
+        { name: "Hamstring and Glute Focused Leg Press", difficulty: "Intermediate" },
+        { name: "Squats", difficulty: "Advanced" },
+        { name: "Lunges", difficulty: "Beginner" },
+        { name: "Romanian Deadlift (RDL's)", difficulty: "Advanced" },
+        { name: "Hack Squats", difficulty: "Advanced" },
+        { name: "Calf Raises", difficulty: "Beginner" },
+        { name: "Quad Extensions", difficulty: "Beginner" },
+        { name: "Hamstring Curls", difficulty: "Beginner" }
+      ]
+    },
+    {
+      id: "abdominals",
+      title: "Abdominals",
+      icon: "🤸‍♂️",
+      exercises: [
+        { name: "Plank", difficulty: "Beginner" },
+        { name: "Sit-Ups", difficulty: "Beginner" },
+        { name: "Weighted Sit-Ups", difficulty: "Intermediate" },
+        { name: "Mountain Climbers", difficulty: "Intermediate" },
+        { name: "Flutter Kicks", difficulty: "Beginner" },
+        { name: "Crunches", difficulty: "Beginner" },
+        { name: "Russian Twists", difficulty: "Intermediate" }
+      ]
+    }
+  ];
 
   return (
-    <div>
-      {/* All od these classes below have a # in the href section, mkake sure to link
-        the correct path in order to further see the workouts and GUI's pertained to the workout */}
-      <section id="back">
-        <h2>Back Workouts</h2>
-        <div className="dropdown">
-          <button className="dropbtn" onClick={() => toggleDropdown("back")}>
-            Back Workouts
-          </button>
+    <div className="grid">
+      <div className="workout-header">
+        <h2 className="heading">Workout Library</h2>
+        <p className="subheading">Choose your muscle group and discover exercises</p>
+      </div>
 
-          <div className="dropdown-content" id="backDropdown">
-            <a href="#">Pull-Ups</a>
-            <a href="#">Deadlifts</a>
-            <a href="#">Seated Rows</a>
-            <a href="#">Bent Over Rows</a>
-            <a href="#">Overhead Lat Pulldown</a>
-            <a href="#">Single Arm Lat Pulldown</a>
+      <div className="workout-categories">
+        {workoutCategories.map((category) => (
+          <div key={category.id} className="workout-category">
+            <div 
+              className={`card workout-card ${activeCategory === category.id ? 'active' : ''}`}
+              onClick={() => setActiveCategory(activeCategory === category.id ? null : category.id)}
+            >
+              <div className="workout-card-header">
+                <span className="workout-icon">{category.icon}</span>
+                <h3>{category.title}</h3>
+                <span className="workout-exercise-count">
+                  {category.exercises.length} exercises
+                </span>
+              </div>
+
+              <div className={`workout-exercises ${activeCategory === category.id ? 'show' : ''}`}>
+                {category.exercises.map((exercise, index) => (
+                  <div key={index} className="workout-exercise">
+                    <div className="workout-exercise-info">
+                      <span className="workout-exercise-name">{exercise.name}</span>
+                      <span className={`badge workout-difficulty ${exercise.difficulty.toLowerCase()}`}>
+                        {exercise.difficulty}
+                      </span>
+                    </div>
+                    <button className="button workout-start-btn">
+                      Start
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
-
-      <section id="biceps">
-        <h2>Bicep Workouts</h2>
-        <div className="dropdown">
-          <button className="dropbtn" onClick={() => toggleDropdown("biceps")}>
-            Bicep Workouts
-          </button>
-          <div className="dropdown-content" id="bicepsDropdown">
-            <a href="#">Dumbbell Bicep Curls</a>
-            <a href="#">Hammer Curls</a>
-            <a href="#">Preacher Curl</a>
-            <a href="#">Cable Curl</a>
-            <a href="#">Barbell Curl</a>
-          </div>
-        </div>
-      </section>
-
-      <section id="chest">
-        <h2>Chest Workouts</h2>
-        <div className="dropdown">
-          <button className="dropbtn" onClick={() => toggleDropdown("chest")}>
-            Chest Workouts
-          </button>
-          <div className="dropdown-content" id="chestDropdown">
-            <a href="#">Barbell Bench Press</a>
-            <a href="#">Dumbbell Bench Press</a>
-            <a href="#">Chest Press</a>
-            <a href="#">Pec Dec Fly</a>
-            <a href="#">Cable Chest Press</a>
-            <a href="#">Dips (Chest focused)</a>
-          </div>
-        </div>
-      </section>
-
-      <section id="triceps">
-        <h2>Tricep Workouts</h2>
-        <div className="dropdown">
-          <button className="dropbtn" onClick={() => toggleDropdown("triceps")}>
-            Triceps
-          </button>
-          <div className="dropdown-content" id="tricepsDropdown">
-            <a href="#">Tricep Pulldowns</a>
-            <a href="#">Seated Tricep Pushdowns</a>
-            <a href="#">Single Arm Tricep Pulldown</a>
-            <a href="#">Bent Over Row</a>
-            <a href="#">Single Arm Tricep Kickback</a>
-            <a href="#">Close Grip Bench Press</a>
-            <a href="#">Skull Crushers</a>
-            <a href="#">Overhead Tricep Extensions</a>
-            <a href="#">Diamond Pushups</a>
-          </div>
-        </div>
-      </section>
-
-      <section id="legs">
-        <h2>Leg Workouts</h2>
-        <div className="dropdown">
-          <button className="dropbtn" onClick={() => toggleDropdown("legs")}>
-            Leg Workouts
-          </button>
-          <div className="dropdown-content" id="legsDropdown">
-            <a href="#">Quad Focused Leg Press</a>
-            <a href="#">Hamstring and Glute Focused Leg Press</a>
-            <a href="#">Squats</a>
-            <a href="#">Lunges</a>
-            <a href="#">Romanian Deadlift (RDL's)</a>
-            <a href="#">Hack Squats</a>
-            <a href="#">Calf Raises</a>
-            <a href="#">Quad Extensions</a>
-            <a href="#">Hamstring Curls</a>
-            <a href="#">Prone Hamstring Curls</a>
-            <a href="#">Goblet Squats</a>
-            <a href="#">Bulgarian Split Squats</a>
-            <a href="#">Hip Abductors</a>
-            <a href="#">Hip Adductors</a>
-            <a href="#">Weighted Hip Thrusts</a>
-          </div>
-        </div>
-      </section>
-
-      <section id="abdominals">
-        <h2>Abdominal Workouts</h2>
-        <div className="dropdown">
-          <button
-            className="dropbtn"
-            onClick={() => toggleDropdown("abdominals")}
-          >
-            Abdominals
-          </button>
-          <div className="dropdown-content" id="abdominalsDropdown">
-            <a href="#">Plank</a>
-            <a href="#">Sit-Ups</a>
-            <a href="#">Weighted Sit-Ups</a>
-            <a href="#">Mountain Climbers</a>
-            <a href="#">Flutter Kicks</a>
-            <a href="#">Crunches</a>
-            <a href="#">Russian Twists</a>
-          </div>
-        </div>
-      </section>
-
+        ))}
+      </div>
       <footer>
         <p>&copy; 2024 The Factory Gym. All rights reserved</p>
       </footer>
