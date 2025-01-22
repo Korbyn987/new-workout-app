@@ -29,6 +29,37 @@ const Layout = ({ children }) => {
     setShowDropdown(false);
   }, [location.pathname]);
 
+  useEffect(() => {
+    const stars = document.querySelector('.stars');
+    const planets = document.querySelector('.planets');
+
+    console.log('Stars element:', stars);
+    console.log('Planets element:', planets);
+
+    if (stars && planets) {
+        // Create star elements
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.opacity = Math.random();
+            stars.appendChild(star);
+            console.log(`Created star ${i+1} of 100:`, star);
+        }
+
+        // Create planet elements
+        for (let i = 0; i < 5; i++) {
+            const planet = document.createElement('div');
+            planet.className = 'planet';
+            planet.style.left = Math.random() * 100 + '%';
+            planet.style.top = Math.random() * 100 + '%';
+            planets.appendChild(planet);
+            console.log(`Created planet ${i+1} of 5:`, planet);
+        }
+    }
+  }, []);
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -65,7 +96,9 @@ const Layout = ({ children }) => {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="App-header galaxy-header">
+        <div className="stars"></div>
+        <div className="planets"></div>
         <div className="header-content">
           <h1>The Factory</h1>
           <div className="header-right">
