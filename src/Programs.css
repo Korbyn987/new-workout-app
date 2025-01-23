@@ -1,0 +1,113 @@
+.programs-container {
+  padding: 4rem;
+  background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+  color: #d8bfff;
+  position: relative;
+}
+
+.programs-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2.5rem; /* Increased gap for spacing */
+  transition: all 0.3s ease;
+}
+
+.program-card {
+  background-color: #2c2c2c;
+  border: 1px solid #444;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.program-card:hover {
+  transform: scale(1.05);
+  background-color: #3a3a3a;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.program-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(107, 70, 193, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: 12px;
+}
+
+.program-card:hover::before {
+  opacity: 1;
+}
+
+.program-card h2 {
+  display: flex;
+  align-items: center;
+}
+
+.program-card h2::before {
+  content: '\1F4AA'; /* Unicode for a dumbbell icon */
+  margin-right: 0.5rem;
+}
+
+.cta-button {
+  background-color: #6b46c1; /* Purple button color */
+  color: white;
+  border-radius: 25px; /* Rounded corners */
+  padding: 0.75rem 1.5rem; /* Increased padding */
+  box-shadow: 0 4px 8px rgba(107, 70, 193, 0.2);
+  transition: background-color 0.3s, transform 0.3s;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.cta-button:hover {
+  background-color: #805ad5; /* Lighter purple on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.category-buttons button {
+  background-color: #6b46c1; /* Purple button color */
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.category-buttons button:hover {
+  background-color: #805ad5; /* Lighter purple on hover */
+}
+
+.toggle-testimonials {
+  background-color: #6b46c1; /* Purple button color */
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-testimonials:hover {
+  background-color: #805ad5; /* Lighter purple on hover */
+}
