@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
+import UserDropdownPortal from "./components/UserDropdownPortal";
 import "./App.css";
 
 const Layout = ({ children }) => {
@@ -8,11 +9,12 @@ const Layout = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [showDropdown, setShowDropdown] = useState(false);
-  const dropdownRef = useRef(null);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
+  const buttonRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (buttonRef.current && !buttonRef.current.contains(event.target)) {
         setShowDropdown(false);
       }
     };
@@ -20,13 +22,43 @@ const Layout = ({ children }) => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
-      setShowDropdown(false);
     };
   }, []);
 
   useEffect(() => {
     setShowDropdown(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    const stars = document.querySelector('.stars');
+    const planets = document.querySelector('.planets');
+
+    console.log('Stars element:', stars);
+    console.log('Planets element:', planets);
+
+    if (stars && planets) {
+        // Create star elements
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.opacity = Math.random();
+            stars.appendChild(star);
+            console.log(`Created star ${i+1} of 100:`, star);
+        }
+
+        // Create planet elements
+        for (let i = 0; i < 5; i++) {
+            const planet = document.createElement('div');
+            planet.className = 'planet';
+            planet.style.left = Math.random() * 100 + '%';
+            planet.style.top = Math.random() * 100 + '%';
+            planets.appendChild(planet);
+            console.log(`Created planet ${i+1} of 5:`, planet);
+        }
+    }
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -47,8 +79,14 @@ const Layout = ({ children }) => {
       .toUpperCase();
   };
 
-  const toggleDropdown = (e) => {
-    e.stopPropagation();
+  const toggleDropdown = () => {
+    if (!showDropdown && buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setDropdownPosition({
+        top: rect.bottom + 8,
+        left: rect.right - 240, // 240px is the dropdown width
+      });
+    }
     setShowDropdown(!showDropdown);
   };
 
@@ -58,8 +96,36 @@ const Layout = ({ children }) => {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>The Factory</h1>
+      <header className="App-header galaxy-header">
+        <div className="stars"></div>
+        <div className="planets"></div>
+        <div className="header-content">
+          <h1>The Factory</h1>
+          <div className="header-right">
+            {user ? (
+              <div className="user-profile">
+                <button 
+                  ref={buttonRef}
+                  className="user-profile-button"
+                  onClick={toggleDropdown}
+                  aria-expanded={showDropdown}
+                  aria-haspopup="true"
+                >
+                  <div className="user-avatar">
+                    {getInitials(user.username)}
+                  </div>
+                  <span className="user-name">{user.username}</span>
+                  <span className={`dropdown-arrow ${showDropdown ? 'open' : ''}`}>▾</span>
+                </button>
+              </div>
+            ) : (
+              <div className="auth-buttons">
+                <Link to="/login" className="auth-link">Login</Link>
+                <Link to="/signup" className="auth-link">Sign Up</Link>
+              </div>
+            )}
+          </div>
+        </div>
         <nav>
           <ul className="gym-button">
             <li>
@@ -93,64 +159,23 @@ const Layout = ({ children }) => {
               </Link>
             </li>
           </ul>
-          <div className="auth-links">
-            {user ? (
-              <div className="user-profile" ref={dropdownRef}>
-                <button 
-                  className="user-profile-button"
-                  onClick={toggleDropdown}
-                  aria-expanded={showDropdown}
-                  aria-haspopup="true"
-                >
-                  <div className="user-avatar">
-                    {getInitials(user.username)}
-                  </div>
-                  <span className="user-name">{user.username}</span>
-                  <span className={`dropdown-arrow ${showDropdown ? 'open' : ''}`}>▾</span>
-                </button>
-                
-                {showDropdown && (
-                  <div className="user-dropdown">
-                    <div className="dropdown-header">
-                      <div className="user-avatar">
-                        {getInitials(user.username)}
-                      </div>
-                      <div className="user-info">
-                        <span className="user-name">{user.username}</span>
-                        <span className="user-email">{user.email}</span>
-                      </div>
-                    </div>
-                    <div className="dropdown-divider"></div>
-                    <div className="dropdown-menu">
-                      <Link to="/profile" className="dropdown-item" onClick={() => setShowDropdown(false)}>
-                        <span className="item-icon">👤</span>
-                        Profile
-                      </Link>
-                      <Link to="/settings" className="dropdown-item" onClick={() => setShowDropdown(false)}>
-                        <span className="item-icon">⚙️</span>
-                        Settings
-                      </Link>
-                      <button onClick={handleLogout} className="dropdown-item logout-item">
-                        <span className="item-icon">🚪</span>
-                        Sign Out
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="auth-buttons">
-                <Link to="/login" className="auth-link">Login</Link>
-                <Link to="/signup" className="auth-link">Sign Up</Link>
-              </div>
-            )}
-          </div>
         </nav>
       </header>
 
-      <main style={{ position: 'relative', zIndex: 0 }}>
+      <main>
         {children}
       </main>
+
+      {user && (
+        <UserDropdownPortal
+          show={showDropdown}
+          onClose={() => setShowDropdown(false)}
+          user={user}
+          handleLogout={handleLogout}
+          getInitials={getInitials}
+          position={dropdownPosition}
+        />
+      )}
     </div>
   );
 };

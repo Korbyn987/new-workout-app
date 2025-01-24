@@ -10,6 +10,7 @@ import Trainers from "./Trainers";
 import Nutrition from "./Nutrition";
 import Login from "./Login";
 import Signup from "./Signup";
+import Programs from './Programs';
 import { AuthProvider } from "./context/AuthContext";
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
           <Route path="/nutrition" element={<Layout><Nutrition /></Layout>} />
           <Route path="/login" element={<Layout><Login /></Layout>} />
           <Route path="/signup" element={<Layout><Signup /></Layout>} />
+          <Route path="/programs" element={<Layout><Programs /></Layout>} />
         </Routes>
       </div>
     </AuthProvider>
