@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# The Factory - Fitness Tracking Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, full-stack fitness tracking application built with React and PHP that helps users manage their workout routines, track BMI progress, and maintain their fitness journey.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- User Authentication (Login/Signup)
+- BMI Calculator and Progress Tracking
+- Workout Programs
+- Nutrition Planning
+- Personal Trainer Profiles
+- Scheduling System
+- Responsive Design
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Frontend
+- **React.js**: Main frontend framework
+- **React Router**: For client-side routing
+- **Context API**: For state management (AuthContext)
+- **CSS3**: Custom styling with modern design principles
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Backend
+- **PHP**: Server-side logic
+- **MySQL**: Database management
+- **XAMPP**: Local development environment
 
-### `npm test`
+## Project Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+new-workout-app/
+├── src/                    # React source files
+│   ├── components/         # Reusable React components
+│   ├── context/           # React Context providers
+│   ├── App.js             # Main application component
+│   ├── Layout.jsx         # Application layout wrapper
+│   └── ...                # Other React components
+├── Backend/               # PHP backend
+│   └── src/              # PHP source files
+└── public/               # Static assets
+```
 
-### `npm run build`
+## Key Features Implementation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Authentication
+- Secure user authentication system
+- Password hashing for security
+- JWT token-based session management
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### BMI Tracking
+- Real-time BMI calculation
+- Progress tracking over time
+- Visual representation of progress
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Workout Programs
+- Customizable workout routines
+- Different difficulty levels
+- Progress tracking
 
-### `npm run eject`
+### React Hooks Used
+- `useState`: For local state management
+- `useEffect`: For side effects and data fetching
+- `useContext`: For accessing global state
+- Custom hooks for reusable logic
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Getting Started
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone the repository
+2. Set up XAMPP and ensure Apache and MySQL services are running
+3. Import the database schema from `Backend/src/Workouts.sql`
+4. Configure the database connection in `Backend/src/connection.php`
+5. Install frontend dependencies:
+   ```bash
+   npm install
+   ```
+6. Start the development server:
+   ```bash
+   npm start
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## API Endpoints
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- `/login.php`: User authentication
+- `/signup.php`: New user registration
+- `/add_bmi_record.php`: Add BMI records
+- `/get_bmi_records.php`: Retrieve BMI history
 
-## Learn More
+## Contributing
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## License
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License.
