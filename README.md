@@ -15,12 +15,14 @@ A modern, full-stack fitness tracking application built with React and PHP that 
 ## Tech Stack
 
 ### Frontend
+
 - **React.js**: Main frontend framework
 - **React Router**: For client-side routing
 - **Context API**: For state management (AuthContext)
 - **CSS3**: Custom styling with modern design principles
 
 ### Backend
+
 - **PHP**: Server-side logic
 - **MySQL**: Database management
 - **XAMPP**: Local development environment
@@ -43,21 +45,25 @@ new-workout-app/
 ## Key Features Implementation
 
 ### Authentication
+
 - Secure user authentication system
 - Password hashing for security
 - JWT token-based session management
 
 ### BMI Tracking
+
 - Real-time BMI calculation
 - Progress tracking over time
 - Visual representation of progress
 
 ### Workout Programs
+
 - Customizable workout routines
 - Different difficulty levels
 - Progress tracking
 
 ### React Hooks Used
+
 - `useState`: For local state management
 - `useEffect`: For side effects and data fetching
 - `useContext`: For accessing global state
